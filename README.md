@@ -14,4 +14,5 @@ Concepts used:
 - Pagination: Loading/Fetching the data in chunks. Which serves less burden on the App and the server.
 - Riverpod state caching.
 - Riverpod stateNotifier Provider used to change and centralize the immumatable state. Which means a state will listen to the provider when it wants itself to change. This will be integrated with paginaion.
--
+- Riverpod FutureProvider is a really powerfull tool which can really help in making the app change its UI in realtime.
+- I had struggle to do so with only Provider but with FutureProvider of Riverpod it was easy peasy.
