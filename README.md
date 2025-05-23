@@ -1,4 +1,4 @@
-# pika_dex
+# poke_dex
 
 A new Flutter project that integrates the "Poke API" to get the data of all the pokemon's.
 This App also focuses on user experience and there preferences of pokemons with a favorite section.
