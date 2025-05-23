@@ -13,7 +13,10 @@ class PokemonStatsCard extends ConsumerWidget {
     final pokemon = ref.watch(pokemonDataProvider(pokemonUrl));
 
     return AlertDialog(
-      title: Text("Statistics"),
+      title: Align(
+        alignment: Alignment.center,
+        child: Text("Statistics", textAlign: TextAlign.center),
+      ),
       content: pokemon.when(
         data: (data) {
           return _statsUI(context, data);
@@ -29,15 +32,58 @@ class PokemonStatsCard extends ConsumerWidget {
   }
 
   Widget _statsUI(BuildContext context, Pokemon? pokemon) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:
-          pokemon?.stats?.map((s) {
-            return Text("${s.stat?.name?.toUpperCase()}: ${s.baseStat} ");
-          }).toList() ??
-          [Text("No stats available.")],
+    return Row(
+      children: [
+        Expanded(
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: MediaQuery.of(context).size.height * 0.05,
+            backgroundImage:
+                pokemon != null
+                    ? NetworkImage(pokemon.sprites!.frontDefault!)
+                    : null,
+          ),
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:
+              pokemon?.stats?.map((s) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("${s.stat?.name?.toUpperCase()}: ${s.baseStat} "),
+                      Stack(
+                        children: [
+                          Container(
+                            height: 5,
+                            width: 140,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                          Container(
+                            height: 5,
+                            width: s.baseStat! * 1.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }).toList() ??
+              [Text("No stats available.")],
+        ),
+      ],
     );
   }
 }

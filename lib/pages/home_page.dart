@@ -125,7 +125,7 @@ class _HomePageState extends ConsumerState<HomePage> {
         children: [
           Text("All Pokemons", style: TextStyle(fontSize: 25)),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.37,
             child: ListView.builder(
               controller: _allPokemonListScrollController,
               itemCount: _homePageData.data?.results?.length ?? 0,
